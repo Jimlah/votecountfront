@@ -13,18 +13,19 @@ const Elections = () => {
         <td className="px-3 py-2">{date}</td>
         <td className="px-3 py-2">
           <button onClick={() => {}}>Edit</button>
-          <button onClick={() => {handleDelete(index)}}>Del</button>
+          <button onClick={() => handleDelete(index)}>Del</button>
         </td>
       </tr>
     );
   };
 
-  const electionList = data.map((dt, index) => (
+  const electionList = data.map((dt) => (
     <Details
       title={dt.title}
       description={dt.description}
       date={dt.election_date}
       key={dt.id}
+      index={dt.id}
     />
   ));
 
@@ -34,15 +35,11 @@ const Elections = () => {
     });
   }, [data]);
 
-
   const handleDelete = (index) => {
     electionService.delete(index).then(() => {
       setData(data.filter((dt, i) => i !== index));
     });
   };
-
-
-
 
   return (
     <div>
